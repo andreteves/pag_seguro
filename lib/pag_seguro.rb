@@ -17,6 +17,7 @@ require "convert_field_to_digit"
 # PagSeguro classes
 require "item"
 require "payment"
+require "direct_payment"
 require "payment_method"
 require "sender"
 require "shipping"
@@ -25,6 +26,9 @@ require "pre_approval"
 require "transaction"
 require "notification"
 require "query"
+require "bank"
+require "credit_card"
+require "billing_address"
 
 # Error classes
 require "errors/unauthorized"

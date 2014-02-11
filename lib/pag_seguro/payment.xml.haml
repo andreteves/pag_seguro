@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+%payment
+  %notificationURL http://www.retroca.com.br/pag_seguro/notify
+  %currency BRL
+  %method= payment.method
+  %mode default
+  %reference= payment.id
+  - if payment.extra_amount.present?
+    %extraAmount= payment.extra_amount
+
+  %items
+    - items.each do |item|
+      %item
+        %id= item.id
+        %description&= item.description
+        %amount= item.amount
+        %quantity= item.quantity
+
+  - if sender.present?
+    %sender
+      %name= sender.name
+      %email= sender.email
+      %hash= sender.hash
+      %phone
+        %areaCode= sender.phone_ddd
+        %number= sender.phone_number
+      %documents
+        %document
+          %type CPF
+          %value= sender.cpf
+
+  - if shipping.present?
+    %shipping
+      %type= shipping.type
+      - if shipping.cost.present?
+        %cost= shipping.cost
+      %address
+        %country BRA
+        - if shipping.state.present?
+          %state= shipping.state
+        - if shipping.city.present?
+          %city= shipping.city
+        - if shipping.postal_code.present?
+          %postalCode= shipping.postal_code
+        - if shipping.district.present?
+          %district= shipping.district
+        - if shipping.street.present?
+          %street= shipping.street
+        - if shipping.number.present?
+          %number= shipping.number
+        - if shipping.complement.present?
+          %complement= shipping.complement
+
+  - if bank.present?
+    %bank
+      %name= bank.name
+
+  - if credit_card.present?
+    %creditCard
+      %token= credit_card.token
+      %installment
+        %quantity= credit_card.installment_quantity
+        %value= credit_card.installment_value
+      %holder
+        %name= credit_card.holder_name
+        %birthDate= credit_card.holder_birth_date
+        %documents
+          %document
+            %type CPF
+            %value= credit_card.holder_cpf
+        %phone
+          %areaCode= sender.phone_ddd
+          %number= sender.phone_number
+      %billingAddress
+        %country BRA
+        - if billing_address.state.present?
+          %state= billing_address.state
+        - if billing_address.city.present?
+          %city= billing_address.city
+        - if billing_address.postal_code.present?
+          %postalCode= billing_address.postal_code
+        - if billing_address.district.present?
+          %district= billing_address.district
+        - if billing_address.street.present?
+          %street= billing_address.street
+        - if billing_address.number.present?
+          %number= billing_address.number
+        - if billing_address.complement.present?
+          %complement= billing_address.complement

@@ -172,6 +172,10 @@ module PagSeguro
     def bonus?
       PAGSEGURO_BONUS == type
     end
+    
+    def payment_link
+      @data.css("paymentLink").first.content
+    end
 
     protected
       def transaction_data(transaction_xml)

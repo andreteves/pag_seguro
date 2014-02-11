@@ -1,12 +1,14 @@
 module PagSeguro
   class Sender
-    attr_accessor :name, :email, :phone_ddd, :phone_number
+    attr_accessor :name, :email, :phone_ddd, :phone_number, :hash, :cpf
 
     def initialize(options = {})
       @name         = options[:name]
       @email        = options[:email]
       @phone_ddd    = options[:phone_ddd]
       @phone_number = options[:phone_number]
+      @hash         = options[:hash]
+      @cpf          = options[:cpf]
     end
 
     def email
