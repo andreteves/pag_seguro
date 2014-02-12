@@ -94,6 +94,11 @@ module PagSeguro
                         type: parse_css("paymentMethod type")
     end
 
+    def escrow_end_date
+      date = parse_css("escrowEndDate")
+      date ? DateTime.iso8601( date ) : nil
+    end
+
     def sender
       sn = Sender.new
       sn.name = parse_css("sender name")
