@@ -65,6 +65,7 @@ module PagSeguro
       when 307 then "Débito online HSBC"
       when 401 then "Saldo PagSeguro"
       when 501 then "Oi Paggo"
+      when 701 then "Depósito em conta - Banco do Brasil"
       else "Desconhecido"
       end
     end
