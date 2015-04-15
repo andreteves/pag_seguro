@@ -3,7 +3,8 @@ module PagSeguro
     include ActiveModel::Validations
     extend PagSeguro::ConvertFieldToDigit
 
-    PAYMENT_URL = "https://ws.pagseguro.uol.com.br/v2/transactions"
+    ENVIRONMENT = Rails.env.production? ? "" : "sandbox."
+    PAYMENT_URL = "https://ws.#{ENVIRONMENT}pagseguro.uol.com.br/v2/transactions"
 
     attr_accessor :id, :email, :token, :items, :sender, :shipping, :billing_address,
                   :credit_card, :bank, :extra_amount, :method, :response
@@ -31,7 +32,7 @@ module PagSeguro
     end
 
     def self.checkout_payment_url(code)
-      "https://pagseguro.uol.com.br/v2/checkout/payment.html?code=#{code}"
+      "https://#{ENVIRONMENT}pagseguro.uol.com.br/v2/checkout/payment.html?code=#{code}"
     end
 
     def payment_xml

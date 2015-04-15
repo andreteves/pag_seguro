@@ -4,8 +4,9 @@ require 'net/https'
 module PagSeguro
   class Transaction
     attr_accessor :data
-
-    PAGSEGURO_TRANSACTIONS_URL  = "https://ws.pagseguro.uol.com.br/v2/transactions"
+    
+    ENVIRONMENT = Rails.env.production? ? "" : "sandbox."
+    PAGSEGURO_TRANSACTIONS_URL  = "https://ws.#{ENVIRONMENT}pagseguro.uol.com.br/v2/transactions"
 
     # possible status values
     PAGSEGURO_PROCESSING        = 1
